@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+</head>
+<body>
+    <h3>User name</h3>{{data.user}}
+    <br><br>
+    <h3>Title</h3> {{data.title}}
+    <br><br>
+    <h3>Description</h3>{{data.description}}
+    <br><br>
+    <h3>Status</h3>{{data.complete }}
+    <br><br>
+    <h3>Date and Time</h3>{{data.create }}
+    <br><br>
+    <h3>Image</h3><img src="{{data.image.url}}" alt="" height="180">
+    <form action="{% url 'update' data.id %}" method="get">
+        <br><br>
+        <input type="submit" value="Click Here : IF DONE WITH THE TASK">
+    </form>
+    <form action="{% url 'index'%}" method="get">
+        <br><br>
+        <input type="submit" value="Click to go back to To do List">
+    </form>
+</body>
+</html>
