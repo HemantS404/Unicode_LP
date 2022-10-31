@@ -2,12 +2,12 @@ from django import forms
 
 priority_chocies =(
         ('Urgent', (
-            ('Urgent & Important', 'Urgent & Important'),
-            ('Urgent & Not Important', 'Urgent & Not Important')
+            ( 1,'Urgent & Important'),
+            (2, 'Urgent & Not Important')
             )),
         ('Not Urgent', (
-            ('Not Urgent & Important', 'Not Urgent & Important'),
-            ('Not Urgent & Not Important', 'Not Urgent & Not Important')
+            (3, 'Not Urgent & Important'),
+            (4,'Not Urgent & Not Important' )
             ))
 )
    

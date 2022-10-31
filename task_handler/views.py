@@ -11,6 +11,15 @@ def mainpage(request):
             i['complete'] = 'INCOMPLETE'
         else:
             i['complete'] = 'COMPLETE'
+    for i in dict1:
+        if i['priority'] == '1':
+            i['priority'] = 'Urgent & Important'
+        elif i['priority'] == '2':
+            i['priority'] = 'Urgent & Not Important'
+        elif i['priority'] == '3':
+            i['priority'] = 'Not Urgent & Important'
+        elif i['priority'] == '4':
+            i['priority'] = 'Not Urgent & Not Important'
     return render(request, 'task_handler/Todo.html', context = {'data' : dict1, 'user': request.user})
 
 def details(request, id):
@@ -19,6 +28,14 @@ def details(request, id):
         a.complete = 'INCOMPLETE'
     else:
         a.complete = 'COMPLETE'
+    if a.priority == '1':
+        a.priority = 'Urgent & Important'
+    elif a.priority == '2':
+        a.priority = 'Urgent & Not Important'
+    elif a.priority == '3':
+        a.priority = 'Not Urgent & Important'
+    elif a.priority == '4':
+        a.priority = 'Not Urgent & Not Important'
     return render(request, 'task_handler/details.html', context = {'data' : a})
 
 def delete(request, id):
