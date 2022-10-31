@@ -25,3 +25,9 @@ class task(models.Model):
 
     class Meta:
         ordering = ['priority']
+
+    def get_tuples(_id = -1, _user = None):
+        if _id != -1:
+            return task.objects.get(id = _id)
+        if _user != None:
+            return task.objects.filter(user = _user).values()

@@ -1,11 +1,11 @@
+from pkgutil import get_data
 from django.shortcuts import render, redirect
 from .models import task
 from datetime import datetime
 from .forms import priorityForm
 
 def mainpage(request):
-    a = task.objects.filter(user = request.user)
-    dict1 = a.values()
+    dict1 = task.get_tuples(_user = request.user)
     for i in dict1:
         if i['complete'] == False:
             i['complete'] = 'INCOMPLETE'
@@ -23,7 +23,7 @@ def mainpage(request):
     return render(request, 'task_handler/Todo.html', context = {'data' : dict1, 'user': request.user})
 
 def details(request, id):
-    a = task.objects.get(id = id)
+    a = task.get_tuples(_id =id)
     if a.complete == False:
         a.complete = 'INCOMPLETE'
     else:
@@ -39,12 +39,12 @@ def details(request, id):
     return render(request, 'task_handler/details.html', context = {'data' : a})
 
 def delete(request, id):
-    a = task.objects.get(id = id)
+    a = task.get_tuples(_id =id)
     a.delete()
     return render(request, 'task_handler/giver.html', {'message': 'DATA DELETED'})
 
 def update(request, id):
-    a = task.objects.get(id = id)
+    a = task.get_tuples(_id =id)
     a.complete = True
     a.save()
     return render(request, 'task_handler/giver.html', {'message': 'DATA UPDATED'})
