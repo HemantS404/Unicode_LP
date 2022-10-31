@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('signup_handler.urls')),
-    path('Todo', include('task_handler.urls')),
+    path('Todo/', include('task_handler.urls')),
 ]
 
 if settings.DEBUG:

@@ -4,7 +4,8 @@ from django.contrib.auth.views import PasswordChangeView
 
 urlpatterns = [
     path('', views.login_user, name = 'login'),
-    path('signup', views.signup_user, name = 'signup'),
-    path('logout', views.logout_user, name = 'logout'),
-    path('passwordreset', PasswordChangeView.as_view(), name = 'passwordreset')
+    path('accounts/login/', views.login_user, name = 'login'),
+    path('accounts/signup', views.signup_user, name = 'signup'),
+    path('accounts/logout', views.logout_user, name = 'logout'),
+    path('accounts/passwordreset', PasswordChangeView.as_view(), name = 'passwordreset')
 ]

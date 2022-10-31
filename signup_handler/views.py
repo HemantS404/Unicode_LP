@@ -16,6 +16,8 @@ def login_user(request):
             messages.success(request, ("Username OR Password do not exsits ...."))	
             return redirect('login')
     else:
+        if request.user.is_authenticated:
+            return redirect('mainpage')
         return render(request, 'signup_handler/login.html')
 
 def signup_user(request):
@@ -30,8 +32,10 @@ def signup_user(request):
             messages.success(request, ("Registration Successful!"))
             return redirect('login')
     else:
+        if request.user.is_authenticated:
+            return redirect('mainpage')
         form = RegisterUserForm()
-    return render(request, 'signup_handler/signup.html', {'form':form,})
+        return render(request, 'signup_handler/signup.html', {'form':form,})
 
 def logout_user(request):
     logout(request)

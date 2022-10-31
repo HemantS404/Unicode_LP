@@ -3,7 +3,9 @@ from django.shortcuts import render, redirect
 from .models import task
 from datetime import datetime
 from .forms import priorityForm
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def mainpage(request):
     dict1 = task.get_tuples(_user = request.user)
     for i in dict1:
@@ -22,6 +24,7 @@ def mainpage(request):
             i['priority'] = 'Not Urgent & Not Important'
     return render(request, 'task_handler/Todo.html', context = {'data' : dict1, 'user': request.user})
 
+@login_required
 def details(request, id):
     a = task.get_tuples(_id =id)
     if a.complete == False:
@@ -38,18 +41,20 @@ def details(request, id):
         a.priority = 'Not Urgent & Not Important'
     return render(request, 'task_handler/details.html', context = {'data' : a})
 
+@login_required
 def delete(request, id):
     a = task.get_tuples(_id =id)
     a.delete()
     return render(request, 'task_handler/giver.html', {'message': 'DATA DELETED'})
 
+@login_required
 def update(request, id):
     a = task.get_tuples(_id =id)
     a.complete = True
     a.save()
     return render(request, 'task_handler/giver.html', {'message': 'DATA UPDATED'})
 
-
+@login_required
 def create(request):
     if request.method == 'GET':
         form = priorityForm()
