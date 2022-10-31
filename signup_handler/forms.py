@@ -1,12 +1,12 @@
 from django.contrib.auth.forms import UserCreationForm
 from signup_handler.models import User
 from django import forms
-
+from django.core import validators
 
 class RegisterUserForm(UserCreationForm):
-	email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
-	first_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
-	last_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
+	email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}), required=True, validators= [validators.EmailValidator()])
+	first_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}), required=True, validators= [validators.MaxLengthValidator(10)])
+	last_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}), required=True, validators= [validators.MaxLengthValidator(10)])
 	
 
 	class Meta:
