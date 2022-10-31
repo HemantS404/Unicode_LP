@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>td {
+        height: 40px;
+        width: 160px;
+        text-align: center;
+        vertical-align: middle;
+      }</style>
+</head>
+<body>
+    <form action="{% url 'logout' %}" method="get">
+        <input type="submit" value="LOGOUT">
+    </form>
+    <form action="{% url 'passwordreset' %}" method="get">
+        <br>
+        <input type="submit" value="Click Here to Change Password">
+    </form>
+    <h1>User : {{user.username}}</h1>
+    <img src="{{user.profile_pic.url}}" alt="UsersImage" height="180">
+    <br>
+    <h1>To Do List</h1>
+    <form action="{% url 'create' %}" method="get">
+        <input type="submit" value="Click Here to Create a New task">
+    </form>
+    <br><br>
+    <table border="solid black" style ="width: 100%;">
+        <tr>
+            <th>Priority</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Details</th>
+            <th>Deletion</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{i.priority}}</td>
+            <td>{{i.title}}</td>
+            <td>{{i.complete}}</td>
+            <td><form action="{% url 'details' i.id %}" method="get"><input type="submit" value="View Details"></form></td>
+            <td><form action="{% url 'delete' i.id %}" method="get"><input type="submit" value="Delete"></form></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
